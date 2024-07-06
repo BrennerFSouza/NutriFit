@@ -1,12 +1,11 @@
 package BrennerSouza.NutriFitAPI.controller;
 
+import BrennerSouza.NutriFitAPI.domain.food.DataCreateFood;
 import BrennerSouza.NutriFitAPI.domain.food.Food;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("foods")
+@RequestMapping("food")
 public class FoodController {
 
     @GetMapping
@@ -16,6 +15,11 @@ public class FoodController {
 
 
         return arroz.toString();
+    }
+
+    @PostMapping
+    public void createFood(@RequestBody DataCreateFood data){
+        System.out.println(data);
     }
 
 }
