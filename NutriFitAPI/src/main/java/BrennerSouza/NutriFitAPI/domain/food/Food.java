@@ -1,4 +1,4 @@
-package BrennerSouza.NutriFit.domain.food;
+package BrennerSouza.NutriFitAPI.domain.food;
 
 public class Food {
 
