@@ -1,0 +1,76 @@
+O sistema WEB precisa ser responsivo
+	Importante funcionar em modo mobile
+
+
+- As principais funções dentro da aplicação devem ser:
+
+	- Tela de login
+		- inicialmente pode ter apenas um diferenciador de usuário, sem gestão de usuário aprofundada
+
+	- Tela de alimentos
+	
+		- Filtro de alimentos para que o usuário possa conferir as informações detalhadas de cada alimento
+		- Lista de todos os  alimentos;
+		- CRUD alimentos
+			Alimento deve ter:
+				quantidade de carboidratos
+				quantidade de proteinas
+				quantidade de gorduras
+				quantidade de fibras
+				quantidade de medida em grama
+				quantidade de medida em colheres
+				talvez uma imagem do alimento
+			
+	- Tela com controle de refeições
+		
+		- alimentos devem ser colocados dentro de uma refeição
+		- Deve conter um CRUD completo das refeições
+		- As refeições devem ter:
+			Nome;
+			Data e hora;
+			Lista de alimento;
+				medida escolhida;
+				quantidade de medida usada;
+				quantidade de carboidratos;
+					Formula para calculo = carboidratos *(quantidade de medida usada / medida padrão)
+				quantidade de proteinas;
+					Formula para calculo = proteinas *(quantidade de medida usada / medida padrão)
+				quantidade de gorduras;
+					Formula para calculo = gorduras *(quantidade de medida usada / medida padrão)
+				quantidade de kcal;
+					Formula para calculo = (4 * carboidratos) + ( 4 * proteinas) + ( 9 * gorduras)
+			Total de todas as metricas
+			
+	- Tela de Dashboard 
+		Controle do peso 
+			Usuário tera o controle do peso desde o inicio até o momento atual
+				Banco de dados de pesagem deve ter:
+					Pesagem;
+					Data da pesagem;
+			Gráfico de linha que acompanha a alteração do peso.
+			Controle de quantidade indicada de ingestão para cada tipo de dieta
+			
+
+*** Pode ser implementado futuramente ***
+- O usuario deve se cadastrar para usar a ferramenta
+		inicialmente pode ter apenas um diferenciador de usuário
+	- O cadastro deve conter: 
+		Nome para login;
+			Deve ser único
+		Senha; 
+		Nome; 
+		Data de nascimento; 
+		Sexo;
+		Tipo de usuário;
+			pensar melhor como fazer, mas deve ter uma divisão entre níveis de usuario
+			
+-	Opção de criar modelos de refeição
+		Deve conter lista de alimentos da refeição;
+		Quantidades;
+		
+		
+	
+	
+	
+	
+	
