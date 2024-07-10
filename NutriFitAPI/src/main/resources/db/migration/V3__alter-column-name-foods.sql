@@ -1,0 +1,1 @@
+ALTER TABLE foods CHANGE COLUMN measureinGrams measure_in_grams float NOT NULL;
