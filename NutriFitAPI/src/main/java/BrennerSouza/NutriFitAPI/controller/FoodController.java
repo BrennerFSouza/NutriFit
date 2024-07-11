@@ -16,7 +16,6 @@ public class FoodController {
     @Autowired
     private FoodRepository repository;
 
-
     @PostMapping
     @Transactional
     public ResponseEntity createFood(@RequestBody @Valid DataCreateFood data, UriComponentsBuilder uriBuilder) {
@@ -28,7 +27,6 @@ public class FoodController {
         var uri = uriBuilder.path("/food/{id}").buildAndExpand(food.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new DataDetailsFood(food));
-
 
     }
 
@@ -46,15 +44,22 @@ public class FoodController {
 
         return ResponseEntity.ok(new DataDetailsFood(food));
     }
-
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity deleteFood(@PathVariable Long id) {
         repository.deleteById(id);
 
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity detailFood(@PathVariable Long id) {
+        var food = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DataDetailsFood(food));
 
     }
+
+
+
 
 
 }
