@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class Food {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer measureInGrams;
@@ -36,6 +37,30 @@ public class Food {
     }
 
 
+    public void updateFoodData(DataUpdateFood data) {
+        if (data.name() != null) {
+            this.name = data.name();
+        }
+        if (data.measureInGrams() != null) {
+            this.measureInGrams = data.measureInGrams();
+        }
+        if (data.carbos() != null) {
+            this.carbos = data.carbos();
+        }
+        if (data.proteins() != null) {
+            this.proteins = data.proteins();
+        }
+        if (data.fats() != null) {
+            this.fats = data.fats();
+        }
+        if (data.fibers() != null) {
+            this.fibers = data.fibers();
+        }
+        if (data.image() != null) {
+            this.image = data.image();
+        }
+    }
+
     @Override
     public String toString() {
         return "Food{" +
@@ -49,29 +74,4 @@ public class Food {
                 '}';
     }
 
-    public void updateFoodData(DataUpdateFood data) {
-        if (data.name() != null){
-            this.name = data.name();
-        }
-        if (data.measureInGrams() != null){
-            this.measureInGrams = data.measureInGrams();
-        }
-        if (data.carbos() != null){
-            this.carbos = data.carbos();
-        }
-        if (data.proteins() != null){
-            this.proteins = data.proteins();
-        }
-        if (data.fats() != null){
-            this.fats = data.fats();
-        }
-        if (data.fibers() != null){
-            this.fibers = data.fibers();
-        }
-        if (data.image() != null){
-            this.image = data.image();
-        }
-
-
-    }
 }
