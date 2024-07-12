@@ -37,4 +37,13 @@ public class User {
         this.birthDate = data.birthDate();
         this.gender = data.gender();
     }
+
+    public void updateDataUser(DataUpdateUser data) {
+        if (data.password() != null){
+            this.password = data.password();
+        }
+        if (data.gender() != null){
+            this.gender = data.gender();
+        }
+    }
 }
