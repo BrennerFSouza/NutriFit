@@ -34,6 +34,12 @@ public class UserController {
         return ResponseEntity.ok(page);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity detailUser(@PathVariable Long id) {
+        var user = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DataDetailsUser(user));
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity updateUser(@RequestBody @Valid DataUpdateUser data) {
@@ -49,12 +55,6 @@ public class UserController {
         repository.deleteById(id);
 
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity detailUser(@PathVariable Long id){
-        var user = repository.getReferenceById(id);
-        return ResponseEntity.ok(new DataDetailsUser(user));
     }
 
 
