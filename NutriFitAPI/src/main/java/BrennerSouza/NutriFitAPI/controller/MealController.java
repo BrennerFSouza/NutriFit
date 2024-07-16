@@ -21,7 +21,7 @@ public class MealController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity createMeal(@RequestBody @Valid DataCreateMeal data){
+    public ResponseEntity createMeal(@RequestBody @Valid DataCreateMeal data) {
         var dto = createMeal.createMeal(data);
 
         return ResponseEntity.ok(dto);
@@ -29,17 +29,33 @@ public class MealController {
     }
 
     @GetMapping("/listallusermeals")
-    public ResponseEntity<List<DataDetailsMeal>> listAllUserMeal(@RequestBody @Valid DataListAllUserMealRequest data){
-        var meals = repository.findAllMealsByUserIdAndDate(data.userId(),data.date());
+    public ResponseEntity<List<DataDetailsMeal>> listAllUserMeal(@RequestBody @Valid DataListAllUserMealRequest data) {
+        var meals = repository.findAllMealsByUserIdAndDate(data.userId(), data.date());
         return ResponseEntity.ok(meals);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity detailMeal(@PathVariable Long id){
+    public ResponseEntity detailMeal(@PathVariable Long id) {
         var meal = repository.getReferenceById(id);
         return ResponseEntity.ok(new DataDetailsMeal(meal));
 
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity updateMeal(@RequestBody @Valid DataUpdateMeal data) {
+        var meal = repository.getReferenceById(data.id());
+        meal.updateDataMeal(data);
+        return ResponseEntity.ok(new DataDetailsMeal(meal));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public  ResponseEntity deleteMeal(@PathVariable Long id){
+        repository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 

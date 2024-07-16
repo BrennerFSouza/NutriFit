@@ -28,4 +28,12 @@ public class Meal {
     private LocalDateTime dateTime;
 
 
+    public void updateDataMeal(DataUpdateMeal data) {
+        if (data.name() != null){
+            this.name = data.name();
+        }
+        if (data.dateTime() != null){
+            this.dateTime = data.dateTime();
+        }
+    }
 }
