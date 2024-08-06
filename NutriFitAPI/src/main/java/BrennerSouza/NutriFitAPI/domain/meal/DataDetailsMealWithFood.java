@@ -21,6 +21,8 @@ public record DataDetailsMealWithFood(
             Integer grams,
             Long foodId,
             String foodName,
+
+
             Double carbos,
             Double Proteins,
             Double fats,
