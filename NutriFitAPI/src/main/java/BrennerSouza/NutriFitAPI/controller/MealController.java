@@ -1,6 +1,12 @@
 package BrennerSouza.NutriFitAPI.controller;
 
+import BrennerSouza.NutriFitAPI.domain.food.DataDetailsFood;
+import BrennerSouza.NutriFitAPI.domain.food.Food;
+import BrennerSouza.NutriFitAPI.domain.food.FoodRepository;
 import BrennerSouza.NutriFitAPI.domain.meal.*;
+import BrennerSouza.NutriFitAPI.domain.mealfood.DataDetailsMealFood;
+import BrennerSouza.NutriFitAPI.domain.mealfood.MealFood;
+import BrennerSouza.NutriFitAPI.domain.mealfood.MealFoodRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("meal")
@@ -15,6 +23,12 @@ public class MealController {
 
     @Autowired
     private MealRepository repository;
+
+    @Autowired
+    private MealFoodRepository mealFoodRepository;
+
+    @Autowired
+    private FoodRepository foodRepository;
 
     @Autowired
     private CreateMeal createMeal;
@@ -39,6 +53,36 @@ public class MealController {
     public ResponseEntity detailMeal(@PathVariable Long id) {
         var meal = repository.getReferenceById(id);
         return ResponseEntity.ok(new DataDetailsMeal(meal));
+
+    }
+
+    @GetMapping("/{id}/detail")
+    public ResponseEntity detailMealWithFoods(@PathVariable Long id) {
+        var meal = repository.getReferenceById(id);
+
+        List<DataDetailsMealFood> mealFoods = mealFoodRepository.findAllMealFoodsByMealId(meal.getId());
+
+
+        List<DataDetailsMealWithFood.FoodDetailDTO> foodDetails = mealFoods.stream().map(mealFood -> {
+            Optional<Food> food = foodRepository.findById(mealFood.foodId());
+            return new DataDetailsMealWithFood.FoodDetailDTO(
+                    mealFood.id(),
+                    mealFood.grams(),
+                    food.get().getId(),
+                    food.get().getName(),
+                    food.get().getCarbos(),
+                    food.get().getProteins(),
+                    food.get().getFats(),
+                    food.get().getFibers(),
+                    food.get().getMeasureInGrams(),
+                    food.get().getImage()
+            );
+        }).collect(Collectors.toList());
+
+        DataDetailsMealWithFood details = new DataDetailsMealWithFood(meal, foodDetails);
+
+        return ResponseEntity.ok(details);
+
 
     }
 

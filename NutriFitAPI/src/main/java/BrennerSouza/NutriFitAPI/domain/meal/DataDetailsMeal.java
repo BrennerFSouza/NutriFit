@@ -11,4 +11,6 @@ public record DataDetailsMeal(
     public DataDetailsMeal(Meal meal) {
         this(meal.getId(), meal.getUser().getId(), meal.getName(), meal.getDateTime());
     }
+
+
 }
